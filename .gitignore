@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Target
+kanji_app
+
+# Debug information
+*.DSYM
