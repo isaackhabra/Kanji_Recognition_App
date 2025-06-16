@@ -38,14 +38,7 @@ TextFrame::TextFrame(const wxChar *title, int xpos, int ypos, int width, int hei
 
 TextFrame::~TextFrame()
 {
-    delete undo;
-    delete clear;
-    delete mainPanel;
-    delete drawingPanel;
-    for(int i = 0; i < NUMBER_MATCHES; i++)
-    {
-        delete topMatches[i];
-    }
+    mainPanel->Destroy();
 }
 
 void TextFrame::setupSizers() 

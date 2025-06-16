@@ -10,14 +10,10 @@
 DrawingPanel::DrawingPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size) : wxWindow(parent, id, pos, size)
 {
     isDrawing = false;
-
     bindControls();
 }
 
-DrawingPanel::~DrawingPanel()
-{
 
-}
 
 void DrawingPanel::bindControls()
 {
@@ -26,6 +22,46 @@ void DrawingPanel::bindControls()
     Bind(wxEVT_LEFT_UP, &DrawingPanel::onLeftMouseReleased, this);
     Bind(wxEVT_MOTION, &DrawingPanel::onMouseHeld, this);
     Bind(wxEVT_LEAVE_WINDOW, &DrawingPanel::onMouseLeave, this);
+}
+
+void DrawingPanel::paintBitmap() {
+    wxBitmap bm(200, 200);
+
+
+    // Set image to pure white
+    {
+        wxMemoryDC clearDC;
+        clearDC.SelectObject(bm);
+        clearDC.SetBackground(wxBrush(wxColour(255, 255, 255, 255))); 
+        clearDC.Clear();
+        clearDC.SelectObject(wxNullBitmap);
+    }
+
+    wxMemoryDC dc;
+    dc.SelectObject(bm);
+
+    wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
+    if(gc) gc->SetPen(*wxBLACK_PEN);
+ 
+
+
+    for(const auto &p : strokes)
+    {
+        if(p.size() > 1)
+        {
+            if(gc)
+            {
+                gc->StrokeLines(p.size(), p.data());   
+            }
+        }
+    }
+
+    wxImage img = bm.ConvertToImage();
+    img.SaveFile("output.png", wxBITMAP_TYPE_PNG);
+
+    dc.SelectObject(wxNullBitmap);
+    delete gc;
+
     
 }
 
@@ -58,14 +94,12 @@ void DrawingPanel::render(wxClientDC& dc)
         }
         
     }
-    //if((strokes.end()-1)->begin() > (strokes.end()-1)->end() - 2) return;
-    //dc.DrawLine(*((strokes.end()-1)->end() - 1), (strokes.end()-1)->end() - 2);
-
 }
 
 void DrawingPanel::onLeftMouseReleased(wxMouseEvent& event)
 {
     isDrawing = false;
+    paintBitmap();
 }
 
 

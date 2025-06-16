@@ -36,3 +36,8 @@ kanji_app
 
 # Debug information
 *.DSYM
+
+# Image Files
+*.png
+*.jpg
+*.jpeg

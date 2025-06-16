@@ -1,10 +1,10 @@
-#ifndef KANJI_GUI
-#define KANJI_GUI
+#pragma once
 
 #include <wx/wx.h>
-#include <wx/dcclient.h>
-#include <wx/graphics.h>
 #include <wx/dcbuffer.h>
+#include <wx/dcclient.h>
+#include <wx/dcmemory.h>
+#include <wx/graphics.h>
 #include <wx/settings.h>
 #include <vector>
 #include "drawingPanel.h"
@@ -52,4 +52,3 @@ class TextFrame : public wxFrame
 
 DECLARE_APP(KanjiApp)
 
-#endif

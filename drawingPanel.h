@@ -11,7 +11,6 @@ class DrawingPanel : public wxWindow
 {
     public:
         DrawingPanel(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size);
-        ~DrawingPanel();
 
 
     private:
@@ -20,6 +19,8 @@ class DrawingPanel : public wxWindow
         bool isDrawing;
 
         void bindControls();
+
+        void paintBitmap();
 
         void render(wxClientDC& dc);
         void Paint();
