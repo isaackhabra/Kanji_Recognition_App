@@ -41,3 +41,12 @@ kanji_app
 *.png
 *.jpg
 *.jpeg
+
+# Image data
+unpack_etlcdb
+
+# compressed
+*.zip
+
+# Python virtual environment
+.venv
